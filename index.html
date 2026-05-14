@@ -128,6 +128,31 @@
   .float-tag { position: absolute; top: 2rem; right: -1rem; z-index: 2; background: var(--panel2); border: 1px solid var(--border2); border-radius: 12px; padding: 0.8rem 1.1rem; font-size: 0.75rem; color: var(--light); line-height: 1.4; max-width: 148px; }
   .float-tag strong { color: var(--accent); display: block; font-size: 1.1rem; font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.05em; }
 
+  .hero-img-wrap {
+    position: relative;
+    border-radius: 24px;
+    overflow: hidden;
+    border: 1px solid var(--border2);
+    aspect-ratio: 4 / 5;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background:
+      radial-gradient(ellipse at 50% 45%, rgba(0,200,150,0.12), transparent 60%),
+      linear-gradient(135deg, #1c1f23 0%, #111214 100%);
+  }
+
+  .hero-product-img {
+    width: 90%;
+    height: 90%;
+    object-fit: contain;
+    object-position: center;
+    display: block;
+    position: relative;
+    z-index: 0;
+  }
   /* ── PROBLEM ── */
   #problem { padding: 8rem 0; background: linear-gradient(180deg, var(--black) 0%, var(--dark) 100%); }
   .problem-header { text-align: center; margin-bottom: 4.5rem; }
@@ -169,7 +194,22 @@
   .showcase-wide { display: grid; grid-template-columns: 2fr 1fr; gap: 1.5rem; margin-top: 1.5rem; }
   .showcase-card { border-radius: 18px; overflow: hidden; border: 1px solid var(--border); background: var(--panel); transition: border-color 0.3s, transform 0.3s; }
   .showcase-card:hover { border-color: rgba(0,200,150,0.25); transform: translateY(-3px); }
-  .showcase-img { overflow: hidden; }
+  .showcase-img {
+    width: 100%;
+    overflow: hidden;
+    background: var(--panel);
+  }
+
+  .showcase-img img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: center;
+    padding: 0 !important;
+    background: transparent !important;
+  }
+
   .showcase-img.tall { aspect-ratio: 3/4; }
   .showcase-img.wide { aspect-ratio: 16/7; }
   .showcase-img.sq { aspect-ratio: 1/1; }
@@ -180,7 +220,19 @@
   /* ── MARKET ── */
   #market { padding: 0; position: relative; }
   .market-banner { min-height: 70vh; display: flex; align-items: center; position: relative; overflow: hidden; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-  .market-bg-img { position: absolute; inset: 0; overflow: hidden; }
+  .market-bg-img {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
+
+  .market-banner-photo {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: center;
+  }
   .market-bg-img::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(10,10,11,0.93) 40%, rgba(10,10,11,0.4) 100%); z-index: 1; }
   .market-bg-img .img-placeholder { border-radius: 0; border: none; }
   .market-bg-img .img-placeholder .corner { display: none; }
@@ -237,11 +289,152 @@
   .team-role { font-size: 0.72rem; color: var(--muted); font-family: 'Space Mono', monospace; }
   .team-card.featured .team-role { color: var(--accent); }
 
+  .slot-img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: contain;
+    object-position: center;
+    padding: 0.75rem;
+    background: #f5f5f5;
+  }
+
+  .slot-img.cover {
+    object-fit: cover;
+  }
+
+  .slot-img.contain {
+    object-fit: contain;
+    padding: 0.5rem;
+    background: #f5f5f5;
+  }
+
+  .modular-slot {
+    background: #f5f5f5;
+  }
+
+  .modular-img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: contain;
+    object-position: center;
+    padding: 0.25rem;
+  }
+
   /* ── FOOTER ── */
   footer { background: var(--black); border-top: 1px solid var(--border); padding: 3rem 2rem; text-align: center; }
   .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 0.7rem; }
   .footer-logo span { color: var(--muted); }
   .footer-text { font-size: 0.78rem; color: rgba(107,114,128,0.6); }
+
+  /* ── DOWNLOAD HINT POPUP ── */
+  .download-hint {
+    position: fixed;
+    top: 85px;
+    right: 24px;
+    z-index: 9999;
+    width: 310px;
+    display: none;
+    background: rgba(26, 28, 31, 0.96);
+    border: 1px solid rgba(0, 200, 150, 0.35);
+    border-radius: 16px;
+    padding: 1.1rem 1.2rem;
+    box-shadow: 0 18px 55px rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(14px);
+    animation: hintPop 0.35s ease forwards;
+  }
+
+  .download-hint.active {
+    display: block;
+  }
+
+  .download-hint-arrow {
+    position: absolute;
+    top: -34px;
+    right: 18px;
+    color: var(--accent);
+    font-size: 2.2rem;
+    animation: arrowPoint 1s ease-in-out infinite;
+  }
+
+  .download-hint-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.55rem;
+    letter-spacing: 0.04em;
+    color: var(--accent);
+    margin-bottom: 0.25rem;
+  }
+
+  .download-hint-text {
+    color: rgba(230, 234, 240, 0.78);
+    font-size: 0.88rem;
+    line-height: 1.6;
+    padding-right: 1.2rem;
+  }
+
+  .download-hint-close {
+    position: absolute;
+    top: 0.7rem;
+    right: 0.8rem;
+    border: none;
+    background: transparent;
+    color: var(--muted);
+    font-size: 1.2rem;
+    cursor: pointer;
+  }
+
+  .download-hint-close:hover {
+    color: var(--accent);
+  }
+
+  .mobile-text {
+    display: none;
+  }
+
+  @keyframes hintPop {
+    from {
+      opacity: 0;
+      transform: translateY(-12px) scale(0.96);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  @keyframes arrowPoint {
+    0%, 100% {
+      transform: translate(0, 0);
+    }
+    50% {
+      transform: translate(6px, -6px);
+    }
+  }
+
+  /* Mobile version */
+  @media (max-width: 700px) {
+    .download-hint {
+      top: auto;
+      right: 16px;
+      left: 16px;
+      bottom: 20px;
+      width: auto;
+      border-radius: 18px;
+    }
+
+    .download-hint-arrow {
+      display: none;
+    }
+
+    .desktop-text {
+      display: none;
+    }
+
+    .mobile-text {
+      display: block;
+    }
+  }
 
   /* ── RESPONSIVE ── */
   @media (max-width: 900px) {
@@ -252,10 +445,43 @@
     .bento { grid-template-columns: 1fr; }
     .span-7,.span-5,.span-6 { grid-column: span 1; }
     .team-grid { grid-template-columns: repeat(2,1fr); }
+    .market-banner {
+      min-height: 560px;
+      align-items: center;
+    }
+
+    .market-banner-photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .market-bg-img::after {
+      background: linear-gradient(
+        180deg,
+        rgba(10,10,11,0.82) 0%,
+        rgba(10,10,11,0.65) 45%,
+        rgba(10,10,11,0.92) 100%
+      );
+    }
+    .modular-slot {
+      aspect-ratio: auto;
+      height: 320px;
+    }
+
+    .modular-img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      padding: 0;
+      transform: none;
+    }
     .market-content { padding: 4rem 2rem; }
     nav { padding: 1rem 1.2rem; }
     .nav-links { display: none; }
     .showcase-wide { grid-template-columns: 1fr; }
+    
   }
   @media (max-width: 600px) { .team-grid { grid-template-columns: 1fr; } }
 </style>
@@ -310,17 +536,18 @@
 
       <div class="hero-visual reveal-scale delay-2">
         <div class="hero-img-wrap" id="hero-img">
-          <div class="img-placeholder">
-            <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
-            <div class="ph-icon">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="8" width="18" height="13" rx="2"/><path d="M8 8V5a4 4 0 0 1 8 0v3"/><line x1="12" y1="12" x2="12" y2="17"/><circle cx="12" cy="17" r="1"/></svg>
-            </div>
-            <div class="ph-label"><strong>Hero Product Render</strong>3D render of the smart 3-bottle dispenser<br>Angled perspective · matte finish · clean BG</div>
-            <div class="ph-dims">800 × 1000 px · PNG or WebP</div>
-          </div>
+          <img src="images/3dmodel.png" alt="3D render of the smart 3-bottle dispenser" class="hero-product-img">
         </div>
-        <div class="hero-badge"><div class="badge-dot"></div><span class="badge-text">Smart Connected</span></div>
-        <div class="float-tag"><strong>3-in-1</strong>Modular base, app-controlled precision</div>
+
+        <div class="hero-badge">
+          <div class="badge-dot"></div>
+          <span class="badge-text">Smart Connected</span>
+        </div>
+
+        <div class="float-tag">
+          <strong>3-in-1</strong>
+          Modular base, app-controlled precision
+        </div>
       </div>
     </div>
   </div>
@@ -393,13 +620,13 @@
         <div class="card-label">01 — Modular Design</div>
         <h3>Expandable at Any Time</h3>
         <p>Starts with 3 essential liquids — perfect for Soy Sauce, Vinegar, and Oil. Add new modules as your kitchen grows and your recipes evolve.</p>
-        <div class="bento-img-slot">
-          <div class="img-placeholder">
-            <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
-            <div class="ph-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div>
-            <div class="ph-label"><strong>Feature: Modular Base</strong>Dispenser with add-on bottle modules — show expansion snap-fit joints</div>
-            <div class="ph-dims">16:9 · 900 × 506 px</div>
-          </div>
+
+        <div class="bento-img-slot modular-slot">
+          <img 
+            src="images/modular.png"
+            alt="Modular dispenser with add-on bottle modules"
+            class="modular-img"
+          >
         </div>
       </div>
       <!-- Speed -->
@@ -416,12 +643,9 @@
         <h3>No Clogging. Ever.</h3>
         <p>Engineered for sticky syrups, honey, and cooking oils. Our optimized nozzle manages every viscosity.</p>
         <div class="bento-img-sq-slot">
-          <div class="img-placeholder">
-            <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
-            <div class="ph-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2v14"/><path d="M5 16l7 6 7-6"/></svg></div>
-            <div class="ph-label"><strong>Close-up Shot</strong>Thick honey or syrup flowing cleanly from nozzle tip</div>
-            <div class="ph-dims">1:1 · 500 × 500 px</div>
-          </div>
+          <img src="images/viscous.png"
+              alt="Modular dispenser with add-on bottle modules"
+              class="slot-img contain">
         </div>
       </div>
       <!-- Smart Control -->
@@ -465,36 +689,33 @@
     <div class="showcase-grid">
       <div class="showcase-card reveal delay-1">
         <div class="showcase-img tall">
-          <div class="img-placeholder" style="border-radius:0;border:none;height:100%">
-            <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
-            <div class="ph-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="6" y="2" width="12" height="20" rx="3"/><line x1="12" y1="6" x2="12" y2="10"/></svg></div>
-            <div class="ph-label"><strong>Product: Front View</strong>Dispenser straight-on · all 3 bottles · clean white background</div>
-            <div class="ph-dims">3:4 · 600 × 800 px</div>
-          </div>
+          <img 
+            src="images/front.png"
+            alt="Front view of the smart 3-bottle dispenser"
+            class="slot-img"
+          >
         </div>
         <div class="showcase-caption"><div class="sc-tag">Front Profile</div><div class="sc-title">Clean 3-bottle modular base</div></div>
       </div>
 
       <div class="showcase-card reveal delay-2">
         <div class="showcase-img tall">
-          <div class="img-placeholder" style="border-radius:0;border:none;height:100%">
-            <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
-            <div class="ph-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div>
-            <div class="ph-label"><strong>LCD Display Close-up</strong>Screen showing ml readout & liquid names — ambient kitchen light</div>
-            <div class="ph-dims">3:4 · 600 × 800 px</div>
-          </div>
+          <img 
+              src="images/lcd.png"
+              alt="Front view of the smart 3-bottle dispenser"
+              class="slot-img"
+            >
         </div>
         <div class="showcase-caption"><div class="sc-tag">Smart Display</div><div class="sc-title">LCD readout with real-time measurement</div></div>
       </div>
 
       <div class="showcase-card reveal delay-3">
         <div class="showcase-img tall">
-          <div class="img-placeholder" style="border-radius:0;border:none;height:100%">
-            <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
-            <div class="ph-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2v14"/><path d="M5 16l7 6 7-6"/></svg></div>
-            <div class="ph-label"><strong>Action Shot: All Pouring</strong>3 nozzles flowing simultaneously into a bowl — top-down angle</div>
-            <div class="ph-dims">3:4 · 600 × 800 px</div>
-          </div>
+          <img 
+            src="images/dispense.png"
+            alt="Front view of the smart 3-bottle dispenser"
+            class="slot-img"
+          >
         </div>
         <div class="showcase-caption"><div class="sc-tag">In Action</div><div class="sc-title">Simultaneous multi-liquid pour</div></div>
       </div>
@@ -503,24 +724,22 @@
     <div class="showcase-wide">
       <div class="showcase-card reveal delay-1">
         <div class="showcase-img wide">
-          <div class="img-placeholder" style="border-radius:0;border:none;height:100%">
-            <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
-            <div class="ph-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
-            <div class="ph-label"><strong>Lifestyle / Context Shot</strong>Dispenser on a modern kitchen counter · warm lighting · ingredients nearby</div>
-            <div class="ph-dims">16:7 banner · 1200 × 525 px · JPG or WebP</div>
-          </div>
+          <img 
+            src="images/front_kitchen.png"
+            alt="Dr. Ratio dispenser on a modern kitchen counter"
+            class="slot-img"
+          >
         </div>
         <div class="showcase-caption"><div class="sc-tag">Lifestyle Context</div><div class="sc-title">Dr. Ratio in your kitchen — where it belongs</div></div>
       </div>
 
       <div class="showcase-card reveal delay-2">
         <div class="showcase-img sq">
-          <div class="img-placeholder" style="border-radius:0;border:none;height:100%">
-            <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
-            <div class="ph-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div>
-            <div class="ph-label"><strong>Exploded / Parts View</strong>Components flat-lay: nozzle, bottle, base, module connector</div>
-            <div class="ph-dims">1:1 · 600 × 600 px</div>
-          </div>
+          <img 
+            src="images/parts.png"
+            alt="Exploded parts view showing nozzle, bottle, base, and module connector"
+            class="showcase-photo contain-img"
+          >
         </div>
         <div class="showcase-caption"><div class="sc-tag">Engineering View</div><div class="sc-title">Modular component breakdown</div></div>
       </div>
@@ -532,11 +751,11 @@
 <section id="market">
   <div class="market-banner">
     <div class="market-bg-img" id="market-bg">
-      <div class="img-placeholder" style="border-radius:0;border:none;">
-        <div class="ph-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div>
-        <div class="ph-label"><strong>Lifestyle Banner Image</strong>Person happily cooking in a clean bright modern kitchen · wide shot · warm tones</div>
-        <div class="ph-dims">Full-width banner · 1600 × 700 px min · JPG or WebP</div>
-      </div>
+      <img
+        src="images/perspective.png"
+        alt="Person happily cooking in a clean bright modern kitchen"
+        class="market-banner-photo"
+      >
     </div>
     <div class="market-content">
       <span class="section-label reveal">Target Market</span>
@@ -565,7 +784,7 @@
           <div class="app-feature-item"><div class="af-dot"></div><span class="af-text">Usage history and analytics for smarter grocery planning</span></div>
         </div>
         <a href="public/DR_RATIO.apk" 
-          class="btn-download reveal delay-4"
+          class="btn-download reveal delay-4 apk-download-trigger"
           download>
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
@@ -690,6 +909,20 @@
   <div class="footer-text">© 2025 Dr. Ratio — Smart Multi-Liquid Dispensing Station · Technopreneurship Project</div>
 </footer>
 
+<div class="download-hint" id="downloadHint">
+  <button class="download-hint-close" id="downloadHintClose">×</button>
+
+  <div class="download-hint-arrow">↗</div>
+
+  <div class="download-hint-title">Download Started</div>
+  <div class="download-hint-text desktop-text">
+    Check the browser downloads icon at the top-right corner.
+  </div>
+  <div class="download-hint-text mobile-text">
+    Check your notification bar, Downloads folder, or browser menu.
+  </div>
+</div>
+
 <script>
   // ── Parallax on hero product image ──
   const heroImg = document.getElementById('hero-img');
@@ -741,6 +974,30 @@
     }, { threshold: 0.15 });
     mObs.observe(marketBg);
   }
+
+  // ── Download hint after APK click ──
+  const downloadHint = document.getElementById('downloadHint');
+  const downloadHintClose = document.getElementById('downloadHintClose');
+  let downloadHintTimer;
+
+  document.querySelectorAll('.apk-download-trigger').forEach(button => {
+    button.addEventListener('click', () => {
+      clearTimeout(downloadHintTimer);
+
+      setTimeout(() => {
+        downloadHint.classList.add('active');
+
+        downloadHintTimer = setTimeout(() => {
+          downloadHint.classList.remove('active');
+        }, 7000);
+      }, 500);
+    });
+  });
+
+  downloadHintClose.addEventListener('click', () => {
+    clearTimeout(downloadHintTimer);
+    downloadHint.classList.remove('active');
+  });
 </script>
 </body>
 </html>
